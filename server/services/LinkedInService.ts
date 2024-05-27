@@ -57,7 +57,7 @@ export class LinkedInService implements NotificationService {
       visibility: {
         'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC',
       },
-      scheduledAt: scheduleDate // Agregar esta línea
+      scheduledAt: scheduleDate
     };
 
     try {
