@@ -1,0 +1,7 @@
+{
+  "services": {
+    "linkedin": true,
+    "facebook": true,
+    "youtube": false
+  }
+}
