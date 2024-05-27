@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import LinkedInController from './controllers/linkedinController';
@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Cambia esto por el origen de tu frontend
+  origin: 'http://localhost:3000',
   credentials: true
 }));
 
@@ -37,6 +37,12 @@ mongoose.connect(MONGO_URI, {}).then(() => {
 import schedulePostRoutes from './routes/schedulePost';
 app.use('/api', schedulePostRoutes);
 app.use('/auth/linkedin', LinkedInController);
+
+// Error handling middleware
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
