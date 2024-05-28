@@ -2,9 +2,9 @@ import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import session from 'express-session';
 import passport from 'passport';
-import LinkedInController from './controllers/linkedinController';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import routes from './routes';
 
 dotenv.config();
 
@@ -34,9 +34,7 @@ mongoose.connect(MONGO_URI, {}).then(() => {
   console.error('Error conectando a MongoDB:', err);
 });
 
-import schedulePostRoutes from './routes/schedulePost';
-app.use('/api', schedulePostRoutes);
-app.use('/auth/linkedin', LinkedInController);
+app.use('/', routes);
 
 // Error handling middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
